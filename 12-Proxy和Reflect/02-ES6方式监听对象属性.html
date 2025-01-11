@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proxy</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      // Proxy:
+      const obj = {
+        name: "xionglp",
+        age: 19,
+        height: 1.88
+      }
+
+      //1. 创建一个代理对象
+      const objProxy = new Proxy(obj, {
+        set: function(target, key, newValue) {
+          console.log(`监听${key}的设置值为: `, newValue)
+          target[key] = newValue
+        }, 
+        get: function(target, key) {
+          console.log(`监听${key}的获取的值为: `, target[key])
+          return target[key]
+        }
+      })
+
+      //2. 对obj的所有操作， 都用objProxy代理对象去操作
+      objProxy.name = "kobe"
+      console.log(objProxy.name)
+      objProxy.address = "深圳"
+      console.log(objProxy.address)
+
+      // 将代理对象转成普通对象
+      // >  { ...proxyObj }
+      // >  vue中使用 toRaw(proxyObj) 转普通对象
+    </script>
+  </body>
+</html>

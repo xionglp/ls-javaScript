@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proxy用法</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      // Proxy: 字面意思 代理，ES6中新增的一个Proxy类，通过new Proxy创建一个代理对象
+      // 1. 对对象的所有操作都通过代理对象来完成， const p = new Proxy(target, handler{})
+      const obj = {
+        name: "xionglp",
+        age: 18,
+        address: "深圳"
+      }
+
+      const objProxy = new Proxy(obj, {
+        set: function(target, key, newValue) {
+          console.log(`监听${key}的设置值为: `, newValue)
+          target[key] = newValue
+        },
+        get(target, key) {
+          console.log(`监听${key}的获取的值为: `, target[key])
+          return target[key]
+        },
+        has: function(target, key) {
+          console.log("has捕捉器: ", key)
+          return key in target
+        },
+        deleteProperty: function(target, key) {
+          console.log("delete捕捉器: ", key)
+          delete target[key]
+        }
+      })
+
+      objProxy.age = 22
+      console.log(objProxy.age)
+      delete objProxy.address
+      console.log("age" in objProxy)
+
+      // 2. 监听函数对象
+      function foo(num1, num2) {
+        console.log(this, num1, num2)
+      }
+
+      const fooProxy = new Proxy(foo, {
+        apply: function(target, thisArg, argArray) {
+          console.log("监听apply操作")
+          target.apply(thisArg, argArray) // apply函数第二个参数传递的就是一个数组类型参数
+        },
+        construct: function(target, argArray) {
+          console.log("监听new操作")
+          return new target(...argArray)
+        }
+      })
+
+      fooProxy.apply("abc", [111, 222])
+      new fooProxy("a", "b")
+
+    </script>
+  </body>
+</html>

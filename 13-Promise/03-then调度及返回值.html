@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>then函数</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      // 1. Promise对象的then函数有2个参数
+      // 2. 一个Promise的then方法是可以被调用多次，当Promise的状态变成fulfilled,这些回调函数都会执行
+      const promise = new Promise((resolve, rejcet) => {
+        resolve("success")
+        // rejcet("failure")
+      })
+
+      promise.then(res => {
+        console.log("resolve res: ", res)
+      }, err => {
+        console.log("reject err: ", err)
+      })
+
+      // 等价
+      promise.then(res => {
+        console.log(res)
+      }).catch((err) => {
+        console.log(err)
+      })
+
+      // 2. 一个Promise的then方法是可以被调用多次，当Promise的状态变成fulfilled,这些回调函数都会执行
+      promise.then(res => {
+        console.log("成功回调: ", res)
+      })
+      promise.then(res => {
+        console.log("成功回调: ", res)
+      })
+      promise.then(res => {
+        console.log("成功回调: ", res)
+      })
+
+      // 3. Promise的then方法返回的也是一个Promise, 所以可以进行链式调用
+      const p = new Promise((resolve, rejcet) => {
+        resolve("aaaaaa")
+      })
+      p.then(res => {
+        console.log("第一个then方法: ", res)
+        return "bbbbbb"
+      }).then(res => {
+        console.log("第二个then方法: ", res)
+        return "cccccc"
+      }).then(res => {
+        console.log("第三个then方法: ", res)
+      })
+
+      p.then(res => {
+        console.log("第一个then方法: ", res)
+        // 1. 普通值
+        // return "nomal value"
+
+        // 2.promise
+        // return new Promise((resolve, rejcet) => {
+        //   setTimeout(() => {
+        //     resolve("xionglp")
+        //   }, 3000);
+        // })
+
+        // 3. thenable对象
+        return {
+          then: function(resolve) {
+            resolve("thenable")
+          }
+        }
+      }).then(res => {
+        console.log("第二个then方法: ", res)
+      })
+    </script>
+  </body>
+</html>

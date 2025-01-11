@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>借用构造函数实现继承</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      function Person(name, age, height, address) {
+        this.name = name
+        this.age = age
+        this.height = height
+        this.address = address
+      }
+
+      Person.prototype.running = function() {
+        console.log("running---")
+      }
+      Person.prototype.eatting = function() {
+        console.log("eatting---")
+      }
+
+      function Student(name, age, height, address, sno, score) {
+        // this.name = name
+        // this.age = age
+        // this.height = height
+        // this.address = address
+
+        // 重点: 借用构造函数实现属性的继承
+        // 这里的this指向的就是student对象
+        Person.call(this, name, age, height, address)
+        this.sno = sno
+        this.score = score
+      }
+
+      // 利用原型链继承
+      // 创建一个父类的实例变量，用这个实例变量作为子类的原型变量
+      var p = new Person("xionglp", 18)
+      Student.prototype = p
+
+      Student.prototype.studying = function() {
+        console.log("studying---")
+      }
+
+      // 创建学生
+      var stu1 = new Student("kobe", 30, 111, 100)
+      var stu2 = new Student("jamse", 25, 111, 100)
+      stu1.running()
+      stu1.studying()
+
+      console.log(stu1.name, stu1.age)
+      console.log(stu1)
+      console.log(stu2.name, stu2.age)
+    </script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reflect用法</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      // Reflect：单词字面意思: 反射的意思 
+      // 使用Reflect可以不直接操作对象，并且Reflect.set方法返回一个boolean值判断本次操作是否成功
+      // const obj = {
+      //   name: "xionglp",
+      //   age: 18
+      // }
+      const obj = {
+        _name: "why",
+        set name(newValue) {
+          console.log("this:", this) // 默认是obj
+          this._name = newValue
+        },
+        get name() {
+          return this._name
+        }
+      }
+      const objProxy = new Proxy(obj, {
+        set: function(target, key, value, receiver) {
+          // 好处一: 不直接操作原对象
+          // 好处二: Reflect.set方法有返回Boolean值, 可以判断本次操作是否成功
+          // 好处三: Reflect.set/get最后一个参数, 可以决定对象访问器setter/getter的this指向
+          const isSuccess = Reflect.set(target, key, value, receiver)
+          if (!isSuccess) {
+            throw new Error(`set ${key} failure`)
+          }
+        },
+        get: function(target, key, receiver) {
+          return Reflect.get(target, key, receiver)
+        },
+        has: function(target, key) {
+          return Reflect.has(target, key)
+        },
+        deleteProperty: function(target, key) {
+          return Reflect.deleteProperty(target, key)
+        }
+      })
+
+      obj.name = "kobe"
+      console.log(obj)
+    </script>
+  </body>
+</html>

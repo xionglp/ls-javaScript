@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>resolve不同值情况</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      // 1. 如果resolve传入的是一个普通的值，那么这个值会作为then回调的参数
+      // 2. 如果resolve传入的是另一个promise，那么这个新的promise决定原来promise的状态
+      // 3. 如果resolve传入的是一个对象，并且这个对象有实现then方法，那么会执行the方法，
+      //    并且会根据then方法的结果来决定promise的状态
+      
+      new Promise((resolve, reject) => {
+        resolve("nomal resolve")
+      }).then(res => {
+        console.log(res)
+      })
+
+      new Promise((resolve, reject) => {
+        const p = new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve("第二个promise的resolve")
+          }, 2000);
+        })
+        resolve(p)
+      }).then(res => {
+        console.log(res)
+      })
+
+      new Promise((resolve, reject) => {
+        resolve({
+          name: "promise",
+          // thenable对象
+          then: function(resolve) {
+            resolve("thenable resolve")
+          }
+        })
+      }).then(res => {
+        console.log(res)
+      })
+    </script>
+  </body>
+</html>

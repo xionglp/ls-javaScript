@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>类的继承extends</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      // 类的继承
+      class Person {
+        constructor(name, age) {
+          this.name = name
+          this.age = age
+        }
+
+        eatting() {
+          console.log("eatting")
+        }
+      }
+
+      class Students extends Person {
+        constructor(name, age, sno, score) {
+          super(name, age)
+          this.sno = sno
+          this.score = score
+        }
+
+        study() {
+          console.log("studying")
+        }
+      }
+
+      var stu1 = new Students("xionglp", 15, 1000, 88)
+      console.log(stu1)
+      stu1.eatting()
+      stu1.study()
+    </script>
+  </body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      // 0、作用域: 简单来说作用域就是变量和函数的可访问范围，由当前环境和上层环境的一系列变量对象组成
+      // 全局作用域: 代码在程序中任何地方都能被访问，window对象内置属性都拥有全局作用域
+      // 函数作用域: 局部作用域，如果一个变量在函数内部声明，它就在一个函数作用域下面
+      // 块级作用域: 凡是代码块可以划分变量的作用域
+      // 作用域的作用: 隔离变量，不同作用域下的同名变量不会有冲突
+
+      // 1、js采用的事静态作用域，函数的作用域和函数定义的位置有关， 跟函数调用的位置没有关系
+      // 2、如果在当前作用域没有找到，就会去上层作用域去查，直到查到全局作用域，这么一个查找的过程形成的链条就叫做作用域链
+
+      // 面试题一:
+      var n = 100
+      function baz() {
+        n = 200
+      }
+      baz()
+
+      console.log(n) // 200
+
+      // 面试题二:
+      function aaa() {
+        console.log(m) // undefined
+        var m = 200
+        console.log(m) // 200
+      }
+
+      var m = 100
+      aaa()
+
+      console.log("------分割线------")
+
+      // 面试题三:
+      var s = 100
+      function bar1() {
+        console.log(s) // 100
+      }
+      function bar2() {
+        var s = 200
+        console.log(s) // 先打印 200
+        bar1()
+      }
+
+      bar2()
+      console.log(s) // 100
+
+      // 面试题四: 
+      var a = 100
+
+      function foo() {
+        console.log(a) // undefined
+        return
+        var a = 200
+      }
+
+      foo()
+      console.log("------分割线------")
+
+      // 面试题五: 
+      function ccc() {
+        var a = b = 100
+      }
+      ccc()
+      console.log(a) // 100
+      console.log(b) // 100
+
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>继承</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      // 面向对象三大特性：封装，继承，多态
+      // 继承可以帮助我们将重复的代码和逻辑抽取到父类中，子类只需要继承过来使用即可。
+
+      // 定义Person构造函数类
+      function Person(name, age) {
+        this.name = name
+        this.age = age
+      }
+
+      Person.prototype.running = function() {
+        console.log("running---")
+      }
+      Person.prototype.eatting = function() {
+        console.log("eatting---")
+      }
+
+      function Student(name, age, sno, score) {
+        this.name = name
+        this.age = age
+        this.sno = sno
+        this.score = score
+      }
+
+      // 利用原型链实现方法的继承
+      // 创建一个父类的实例变量，用这个实例变量作为子类的原型变量
+      // 利用原型链继承的弊端：
+      // 1. 我们直接通过打印对象是看不到这个属性
+      // 2. 这个属性会被多个对象共享，如果这个对象是个引用类型，会有问题
+      // 3. 不能给Person传递参数（让每个stu有自己属性），因为对象是一次性创建的
+      var p = new Person("xionglp", 18)
+      Student.prototype = p
+
+      Student.prototype.studying = function() {
+        console.log("studying---")
+      }
+
+      // 创建学生
+      var stu1 = new Student("kobe", 30, 111, 100)
+      var stu2 = new Student("jamse", 25, 111, 100)
+      stu1.running()
+      stu1.studying()
+
+      console.log(stu1.name, stu1.age)
+      console.log(stu1)
+      console.log(stu2.name, stu2.age)
+    </script>
+  </body>
+</html>

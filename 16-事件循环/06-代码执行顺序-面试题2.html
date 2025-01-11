@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      console.log("script start");
+      function requestData(url) {
+        console.log("requestData");
+        // 有返回又有new Promise， 先执行promise的代码 再返回
+        // setTimeout 延迟2s， 先让浏览器自己去计时调度， 代码继续往下执行
+        return new Promise((resolve) => { 
+          setTimeout(() => {
+            console.log("setTimeout");
+            resolve(url);
+          }, 2000);
+        });
+      }
+
+      // 2.await/async
+      async function getData() {
+        console.log("getData start");
+        // 要等await返回出结果了， 才会继续执行res后面的代码  
+        const res = await requestData("why");
+        console.log("then1-res:", res);
+        console.log("getData end");
+      }
+
+      getData();
+      console.log("script end");
+      //script start
+      //getData start
+      // requestData
+      //script end
+
+      // setTimeout
+      // then1-res
+      //getData end
+    </script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      // ES5之前，通过function关键字来申明一个构造函数（类），之后通过new关键字进行调用
+      // ES6之后，JavaScript可以像别的编程语言一样，通过class申明一个类
+      // 构造函数使用大驼峰
+      function Person() {
+        
+      }
+
+      // 构造函数也是一个普通的函数，从表现形式来说和别的函数没有区别
+      // 如果new 操作符调用了，就是一个构造函数了
+      var p1 = new Person()
+      console.log(p1)
+
+      // 普通函数使用小驼峰
+      function sayHello() {
+        
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promise类方法</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      // Promise的类方法
+      // 1. resolve方法：将现成的内容转成Promise来使用
+      Promise.resolve("xionglp")
+      //等价于
+      new Promise((resolve) => {
+        resolve("xionglp")
+      })
+
+      // 2. reejct方法: 类似Resolve方法，将值转成Promise对象，Promise对象的状态设置为reject状态
+      Promise.reject("xionglp")
+      // 等价于
+      new Promise((resolve, reject) => {
+        reject("xionglp")
+      })
+
+      // 3. all方法: 多个Promise包裹在一起形成一个新的Promise，
+      // 当多有的Promise对象状态变成fulfailled状态，新Promise状态为fulfailled状态，返回值为所有Promise返回值形成的数组
+      // 当有一个Promise的状态为reject，新的Promise的状态为reject，并且会将第一个reject作为参数
+      const p1 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve("p1 resolve")
+          // reject("p1 reject")
+        }, 2000);
+      })
+      const p2 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          // resolve("p2 resolve")
+          reject("p2 reject")
+        }, 6000);
+      })
+      const p3 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve("p3 resolve")
+        }, 4000);
+      })
+
+      Promise.all([p1, p2, p3]).then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+      })
+
+      // 4. allSettled方法: 
+      // all方法有一个缺陷，当其中有一个promise变成reject状态时，
+      // 新Promise会立即变成reject状态，对应其他的promise就获取不到状态对应的结果;
+      // allSettled方法会等所有的Promise都有结果（无论是fulfailled还是rejected）才会有最终的状态
+      Promise.allSettled([p1, p2, p3]).then((res) => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+      })
+
+      // 5. race方法: 多个Promise，谁先有结果，就用谁的结果， 单词字面意思也是竞争的意思
+      Promise.race([p1, p2, p3]).then((res) => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+      })
+    </script>
+  </body>
+</html>

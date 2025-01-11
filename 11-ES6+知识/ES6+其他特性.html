@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ES6+特性</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      // ES7: Array includes用法: 判断一个数组中是否包含某个元素
+      const names = ["111", "222", "333"]
+      console.log(names.includes("111"))
+      console.log(names.includes("134"))
+
+      // for...in 用于遍历对象的key的
+      const obj = {
+        name: "xionglp",
+        age: 12,
+        height: 1.99
+      }
+      for(const key in obj) {
+        console.log(key)
+      }
+
+      // 数组扁平化
+      // 1. flat: 按照一个指定深度递归遍历数组，将所有元素与遍历到子数组的元素合并到一个新数组, 
+      const nums = [10, 20, [111, 222], [333, 444], [[123, 321], [231, 312]]]
+      const num1 = nums.flat(1)
+      console.log(num1)
+      const num2 = nums.flat(2)
+      console.log(num2) 
+
+      // 2. flatMap: 其实就是先对其进行map操作，在进行flat操作，默认flat是1
+      const messages = [
+        "Hello World aaaaa",
+        "Hello Coderwhy",
+        "你好啊 李银河"
+      ]
+
+      const newMessages = []
+      for (const item of messages) {
+        const tempArr = item.split(" ")
+        // newMessages.push(tempArr)
+        for (const value of tempArr) {
+          newMessages.push(value)
+        }
+      }
+      console.log(newMessages)
+
+      const arr = messages.map(item => item.split(" "))
+      console.log(arr)
+      const finalMessages = arr.flat(1)
+      console.log(finalMessages)
+
+      // const finalMessage = messages.flatMap((item) => {
+      //   return item = item.split(" ")
+      // })
+      // console.log(finalMessage)
+    </script>
+  </body>
+</html>

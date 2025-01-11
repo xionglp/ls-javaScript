@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>对象属性描述符</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      // 2024-05-17
+      // Object.defineProperty()  对对象属性进行添加或者修改
+      
+      // 属性描述符分类：
+      // 1. 数据属性描述符
+      // [[Configurable]]: 表示属性是否可以通过delete删除，直接在对象上定义属性默认为true，通过属性描述符设置的时候默认为false
+      // [[Enumerable]]: 表示属性是否通过for-in或者Object.keys()返回该属性， 直接在对象上定义属性默认为true，...同上
+      // [[Writable]]: 表示是否可以修改属性的值，直接在对象上定义属性默认为true，...同上
+      // [[value]]: 属性的value值，读取属性时返回该值，修改属性时对其进行修改
+
+      // 2. 存储属性描述符
+      // [[Configurable]]: 表示属性是否可以通过delete删除，直接在对象上定义属性默认为true，通过属性描述符设置的时候默认为false
+      // [[Enumerable]]: 表示属性是否通过for-in或者Object.keys()返回该属性， 直接在对象上定义属性默认为true，...同上
+      // [[get]]: 获取属性时执行函数，默认值为undefined
+      // [[set]]: 设置属性时执行函数， 默认值为undefined
+
+      // 1. 数据属性描述符
+      var dataObj = {
+        name: "xionglp", // 默认configurable为true， 
+        age: 20
+      }
+
+      Object.defineProperty(dataObj, "name", {
+        configurable: false, // 不能删除该属性
+        enumerable: false, // 不能通过for-in或者Object.keys()遍历
+        writable: false, // 只读属性， 不能对其修改
+        value: "珠海"
+      })
+
+      console.log(dataObj)
+      console.log(Object.getOwnPropertyDescriptor(dataObj, "name"))
+
+      // 2.存储数据描述符
+      storageObj = {
+        name: "vuejs",
+        age: 22
+      }
+
+      // 其实是vue2的响应式原理
+      var _name = ""
+      Object.defineProperty(storageObj, "name", {
+        configurable: true,
+        enumerable: true,
+        set: function(value) {
+          _name = value
+          console.log("set方法被调用了", value)
+        },
+        get: function() {
+          console.log("get方法被调用了")
+          return _name
+        }
+      })
+
+      storageObj.name = "xjz"
+      storageObj.name = "xiongluping"
+      storageObj.name = "liushuang"
+      console.log(storageObj.name)
+
+      // 3. 同时定义多个属性
+      moreObj = {
+        name: "xionglp",
+        age: "32",
+        height: 1.78
+      }
+
+      Object.defineProperties(moreObj, {
+        name: {
+          configurable: false,
+          enumerable: false,
+          writable: false,
+          value: "liushuang",
+        },
+        age: {
+          configurable: false,
+          enumerable: false,
+          writable: false,
+          value: 21
+        },
+        height: {
+          configurable: false,
+          enumerable: false,
+          writable: false,
+          value: 1.98
+        }
+      })
+
+      console.log(moreObj)
+      console.log(Object.getOwnPropertyDescriptors(moreObj))
+
+      // 4. 属性描述符的其他方法
+      var obj = {
+        name: "xionglp",
+        age: 18
+      }
+
+      // 1. 获取属性描述符
+      console.log(Object.getOwnPropertyDescriptor(obj, "name"))
+      console.log(Object.getOwnPropertyDescriptors(obj))
+
+      // 2. 禁止给对象扩展新的属性
+      Object.preventExtensions(obj)
+      obj.address = "深圳"
+      console.log(obj)
+
+      // 3. 密封对象，不允许配置和删除属性， 
+      //本质上就是调用了preventExtensions方法，并将现有属性configurable设置为false
+      Object.seal(obj)
+      delete obj.name
+      console.log(obj)
+
+      // 4.冻结对象，不允许修改现有属性, 
+      Object.freeze(obj)
+      obj.name = "xjz"
+      console.log(obj)
+    </script>
+  </body>
+</html>

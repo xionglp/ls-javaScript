@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        color: red;
+      }
+      table {
+        border-collapse: collapse;
+      }
+
+      td {
+        padding: 8px 16px;
+        border: 1px solid orange;
+        color: #555;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      // 屏幕上显示一个❤
+      // doucument.write("❤")
+
+      for (var i = 0; i < 9; i++) {
+        document.write('<div>')
+        for (var j = 0; j < 10; j++) {
+          document.write('❤ ')
+        }
+        document.write('</div>')
+      }
+
+      for (var i = 0; i < 6; i++) {
+        document.write('<div>')
+        for (var k = 0; k < i + 1; k++) {
+          document.write('❤')
+        }
+        document.write('</div>')
+      }
+
+      document.write('<table>')
+      for (var i = 0; i < 9; i++) {
+        document.write('<tr>')
+        for (var k = 0; k < i + 1; k++) {
+          var a = k + 1
+          var b = i + 1
+          var result = (k + 1) * (i + 1)
+          document.write(`<td>${a}*${b}=${result}</td>`)
+        }
+        document.write('</tr>')
+      }
+      document.write('</table>')
+    </script>
+  </body>
+</html>

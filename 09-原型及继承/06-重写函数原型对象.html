@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>重写函数原型对象</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      // 如果我们需要在原型上添加过多的属性，通常我们会重写整个原型对象.
+      // 每创建一个函数， 就会同时创建它的prototype显示原型对象，这个对象也会自动获取constructor属性
+      // 而这里相当于给prototype重新赋值了一个对象，那么这个新对象的constructor属性会指向Object对象，而不是Person构造函数
+      function Person() {}
+      console.log(Person.prototype)
+      // 在原有的原型对象上添加属性
+      Person.prototype.name = "xionglp"
+      Person.prototype.age = 18
+      Person.prototype.info = {name: "hello", age: 22}
+      Person.prototype.running = function() {}
+      Person.prototype.eatting = function() {}
+      // console.log(Person.prototype)
+      // console.log(Object.keys(Person.prototype))
+      // console.log(Person.prototype.constructor)
+
+      // 2. 直接赋值一个新的原型对象
+      Person.prototype = {
+        name: "xionglp",
+        age: 18,
+        info: {
+          name: "haha",
+          age: 33
+        },
+        running: function() {},
+        studying: function() {}
+      }
+      Object.defineProperty(Person.prototype, "constructor", {
+        enumerable: false,
+        configurable: true,
+        writable: true,
+        value: Person
+      })
+      console.log(Person.prototype.constructor)
+    </script>
+  </body>
+</html>

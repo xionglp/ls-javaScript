@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>this指向-默认绑定</title>
+</head>
+<body>
+  <script>
+    // 函数在调用的时候，js会默认给this绑定一个值，
+    // this绑定和函数定义（编写的位置）没有关系
+    // this的绑定和调用的方式及调用的位置有关，并且this是运行时绑定的
+    
+    // 1. 独立函数调用， this => window
+    function foo () {
+      console.log("foo: ", this)
+    }
+    foo() 
+
+    // 2. 函数定义在对象中， 但是也是独立函数调用, this指向的也是全局
+    var obj = {
+      name: "obj",
+      bar: function() {
+        console.log("bar: ", this)
+      }
+    }
+
+    var bar = obj.bar
+    bar() // 独立函数调用，  this => window
+    obj.bar() // this -> obj对象
+
+    // 3. this绑定和函数定义（编写的位置）没有关系, 跟调用的位置有关系，
+    // 都是独立函数调用
+    function test1() {
+      console.log(this) // window
+      test2()
+    }
+
+    function test2() {
+      console.log(this) // window
+      test3()
+    }
+
+    function test3() {
+      console.log(this) // window
+    }
+
+    test1()
+
+    // 4. obj2.bar 是一个独立的函数， 独立函数调用this指向的是window
+    function foo2(func) {
+      func()
+    }
+
+    var obj2 = {
+      name: "xionglp",
+      bar: function() {
+        console.log(this)
+      }
+    }
+
+    foo2(obj2.bar) // window
+  </script>
+  
+</body>
+</html>

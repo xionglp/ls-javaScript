@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Symbol用法</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      // Symbol：ES6中新增的一种数据类型， 翻译为符号
+      // Symbol值通过Symbol函数，生成独一无二的值，即使多次创建，他们也是不同的值 
+      // ES6中， 对象的属性名可以是字符串也可以是Symbol值
+      const s1 = Symbol()
+      const s2 = Symbol("bbb")
+      const obj = {}
+      // 写法一： 属性名赋值
+      obj[s1] = "s1"
+      obj[s2] = "s2"
+      console.log(obj)
+
+      // 写法二：字面量方式
+      const info = {
+        [s1]: "infoS1",
+        [s2]: "infoS2",
+        name: "xionglp"
+      }
+      console.log(info)
+
+      // Object.defineProperty
+      Object.defineProperty(obj, s1, {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        value: "definePropertyValue"
+      })
+      console.log(obj)
+
+      console.log(Object.getOwnPropertySymbols(info)) // 获取对象Symbol属性
+      const symbolKeys = Object.getOwnPropertySymbols(info)
+      for (const key of symbolKeys) {
+        console.log(info[key])
+      }
+
+      // 相同值的Symbol
+      const s3 = Symbol.for("abc")
+      const s4 = Symbol.for("abc")
+      console.log(s3 === s4)
+
+      const key = Symbol.keyFor(s3)
+      console.log(key)
+      const s5 = Symbol.for(key)
+      console.log(s3 === s5)
+    </script>
+  </body>
+</html>

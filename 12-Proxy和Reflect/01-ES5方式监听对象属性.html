@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ES5监听对象属性</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      // ES5监听对象属性：对象属性描述符
+      const obj = {
+        name: "xionglp",
+        age: 18,
+        height: 1.88,
+        address: "深圳市"
+      }
+
+      // 1. 监听属性操作，针对一个属性
+      // let _name = name;
+      // Object.defineProperty(obj, "name", {
+      //   configurable: true,
+      //   enumerable: true,
+      //   set: function(value) {
+      //     console.log("监听: 给name属性设置了新的值 ", value)
+      //     _name = value
+      //   },
+      //   get: function() {
+      //     console.log("监听: 获取name的值 ", _name)
+      //     return _name
+      //   }
+      // })
+
+      // obj.name = "kobe"
+      // obj.name = "curry"
+      // console.log(obj.name)
+
+      // 2. 监听对象的所有属性，遍历所有属性，给每一个属性Object.defineProperty
+      const keys = Object.keys(obj)
+      for (const k of keys) {
+        let value = obj[k]
+        Object.defineProperty(obj, k, {
+          configurable: true,
+          enumerable: true,
+          set: function(newValue) {
+            console.log(`监听: ${k}设置了新值`, value)
+            value = newValue
+          },
+          get: function() {
+            console.log(`监听: 获取${k}的值`)
+            return value
+          }
+        })
+
+        console.log(obj.age)
+        obj.age = 17
+        console.log(obj.age)
+      }
+
+    </script>
+  </body>
+</html>

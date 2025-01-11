@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>this指向-new绑定</title>
+    <style></style>
+  </head>
+  <body>
+    
+    <script>
+      // new关键字调用函数， 会做这些事情：
+      // 1. 创建一个全新的对象
+      // 2. 这个对象内部的[[prototype]]会被赋值该构造函数的prototype
+      // 3. 这个新对象会被绑定到函数调用的this上
+      // 4. 执行函数体代码
+      // 5. 如果没有返回其他对象，表达式会返回这个新对象
+      function Person(name) {
+        console.log(this) // Person {}
+        this.name = name 
+      }
+
+      var person = new Person("xionglp")
+      console.log(person) // { name: "xionglp" }
+    </script>
+
+  </body>
+</html>

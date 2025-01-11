@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>finally函数</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      // Promise对象状态无论是fulfailled还是rejected，都会执行，
+      // finally方法不接受参数， 因为不管是fulfailled还是rejected，都会执行
+      new Promise((resolve, reject) => {
+        // resolve("promise")
+        reject("err")
+      }).then(res => {}).catch(err => {}).finally(() => {
+        console.log("做一些操作")
+      })
+    </script>
+  </body>
+</html>

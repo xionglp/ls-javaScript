@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>原型链</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      // 原型链: 从一个对象获取属性，如果在当前对象中没有获取到就会去它的原型上查找，
+      // 一直找到Object的隐式原型__proto__指向null的时候截止
+      // 1. {}的本质
+      var info = {} //相当于
+      // var info = new Object()
+      console.log(info.__proto__ === Object.prototype)
+
+      // 2. 原型链
+      var obj = {
+        name: "xionglp",
+        age: 18
+      }
+      console.log(obj.__proto__)
+
+      obj.__proto__ = {
+        // message: "aaa"
+      }
+      obj.__proto__.__proto__ = {
+        message: "bbb"
+      }
+      obj.__proto__.__proto__.__proto__ = {
+        message: "ccc"
+      }
+      console.log(obj.message)
+
+      // Object的原型
+      // 该对象有原型属性，但是它的原型属性指向的是null，也就是最顶层的原型了
+      // 该对象上有很多默认的属性和方法
+      console.log(obj.__proto__.__proto__.__proto__.__proto__)
+    </script>
+  </body>
+</html>

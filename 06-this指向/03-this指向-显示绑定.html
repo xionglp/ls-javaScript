@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>显示绑定this</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+     //1. call: 接收2个参数，第一个参数是this的指向，第二个参数是函数调用时需要传递的参数（可以是参数列表），原函数会立即指向一次
+     //2. apply: 接收2个参数， 第一个参数是this的指向， 第二个参数是函数接收的参数，以数组的形式传入，原函数会立即指向一次
+     //3. bind: 接收2个参数， 第一个参数是this的指向，第二个参数是参数列表的形式传递，
+     // 不会立即执行，返回一个修改this指向之后的新函数
+     
+    // 如果希望一个函数总是显示的绑定在一个对象上面， 可以通过bind()方法创建一个新的绑定函数
+    // 在bind()被调用的时候， 这个新函数的this被指定为bind()的第一个参数，而其余参数作为新函数的参数
+  
+      var obj = {
+         name: "xionglp"
+      }
+
+      function foo(num) {
+        console.log("foo函数: ", this, num)
+      }
+
+      // 用函数去掉call，apply， bind， 传入的第一个参数就是this指向的那个东西
+      // 执行函数，并且函数中的this指向obj对象
+      foo.call(obj, 45)
+      foo.call({name: "vuejs"})
+      foo.call(window)
+      foo.call(123)
+
+    </script>
+  </body>
+</html>

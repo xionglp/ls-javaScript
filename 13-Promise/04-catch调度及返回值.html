@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>catch函数</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      const promise = new Promise((resolve, reject) => {
+        reject("failure")
+      })
+
+      promise.then((res) => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+      }) 
+
+      promise.catch(err => {
+        console.log(err)
+      })
+      promise.catch(err => {
+        console.log(err)
+      })
+      promise.catch(err => {
+        console.log(err)
+      })
+
+      // catch返回值： catch方法调用之后也会返回一个promise，
+      // catch传入的回调执行完之后，默认状态依旧是fulfailled
+      promise.catch(err => {
+        console.log("err1: ", err)
+        return "111"
+      }).catch(err => {
+        console.log("err2: ", err)
+      }).then(res => {
+        console.log("res: ", res)
+      })
+
+      // 中断函数继续执行
+      // 1. return
+      // 2. throw new Error()
+      // 3. yield 暂停
+      const p = new Promise((resolve, reject) => {
+        resolve("aaa")
+      })
+
+      p.then(res => {
+        console.log("then第一次回调: ", res)
+        return "bbb"
+      }).then(res => {
+        console.log("then第二次回调: ", res)
+        throw new Error("异常error")
+      }).then(res => {
+        console.log("then第三次回调: ", res)
+      }).catch(err => {
+        console.log("catch回调被执行: ", err)
+      })
+
+    </script>
+  </body>
+</html>

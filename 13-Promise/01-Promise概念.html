@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promise概念</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      // Promise: 异步回调编程的一种解决方案, 字面翻译：承诺，许诺
+      // 通过new Promise() 创建一个Promise对象，传入一个回调函数
+      // 1. 这个回调函数会立即执行，并且传入另外俩个回调函数resolve、reject
+      // 2. 当我们调用resolve回调函数时，会执行promise对象中then方法中的回调函数
+      // 3. 当我们回调reject回调函数时，会执行promise对象中catch防范中的回调函数
+
+      // Promise: 有三种状态，pending等待中、fulfilled已兑现、rejected已拒绝
+      // 注意: 一旦状态被确认下来， Promise的状态就确定下来了，不能在更改了。
+
+      // 创建一个promise对象
+      const promise = new Promise((resolve, reject) => {
+        // pendding等待状态
+        console.log("1111")
+        console.log("2222")
+
+        resolve("回调成功")
+        // 状态一旦被确定下来， 不就会再更改promise对象的状态， 所有下面reject执行了也不会响应
+        reject("回调失败") 
+      })
+
+      promise.then((res) => {
+        console.log(res)
+      }).catch((errMsg) => {
+        console.log(errMsg)
+      })
+    </script>
+  </body>
+</html>

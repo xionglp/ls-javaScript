@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>函数参数</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      // ES6中函数参数的一些用法：
+      // 1. 函数默认参数，允许给函数一个默认值
+      function foo(x = 20, y = 30) {
+        console.log(x, y)
+      }
+      foo()
+      foo(40, 60)
+
+      function bar() { // 利用arguments实现默认参数的效果
+        var x = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 20
+        var y = arguments.length > 0 && arguments[1] !== undefined ? arguments[1] : 30
+        console.log(x, y)
+      }
+
+      // 2. 剩余参数 rest ， 如果最后一个参数是以 ...为前缀的，那么它会将剩余的参数放到该参数中，并且作为一个数组
+      // 剩余参数必须放在最后一个
+      // 剩余参数rest 和arguments的区别：
+      // 剩余参数只是包含那些没有对应形参的实参， 而arguments对象包含了传给参数的所有实参
+      function baz(m, n, ...args) {
+        console.log(m, n)
+        console.log(args)
+      }
+      baz(1, 2, 4, 5, 6)
+
+      // 3.展开运算符：展开运算符其实是一种浅拷贝
+      const names = ["aaa", "bbb", "ccc"]
+      const message = "vuejs"
+      const newNames = [...names, "ddd", "eee"]
+      console.log(newNames)
+
+      function fun(name1, name2, ...args) {
+        console.log(name1, name2, args)
+      }
+      fun(...names)
+      fun(...message)
+
+      const obj = {
+        name: "xionglp",
+        age: 18
+      }
+
+      const dic = {
+        ...obj,
+        address: "深圳"
+      }
+      console.log(dic)
+
+      // 不能这样使用 Spread syntax requires ...iterable[Symbol.iterator] to be a function
+      // 在函数调用时，用展开运算符，将对应的数据展开进行迭代， 普通的Object不是可迭代对象
+      // arguments, 数组，String字符串 是可迭代对象
+      fun(...obj)
+    </script>
+  </body>
+</html>

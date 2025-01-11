@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      var info = {
+        name: "xionglp",
+        age: 18,
+        running: function() { // 函数才有作用域， 对象没有作用域，对象只是一种数据类型
+          console.log("running~", this.name)
+          console.log(this)
+        },
+        studying: function() {
+          console.log("study~", this.name)
+        },
+        eating: function() {
+          console.log("eating~", this.name)
+        }
+      }
+
+      info.running()
+      info.studying()
+      info.eating()
+    </script>
+  </body>
+</html>

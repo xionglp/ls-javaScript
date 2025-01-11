@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ES6定义变量</title>
+    <style></style>
+  </head>
+  <body>
+    <script>
+      // ES5定义变量使用var， ES6之后使用let、const定义变量
+      // 1、var可以重复定义变量，let和const不能重复定义变量
+
+      // 什么叫作用域提升： 在申明变量的作用域中，如果这个变量可以在申明之前被访问， 称之为作用域提升；
+      // 2. var具有作用域提升， let和const严格上讲是没有作用域提升的， 
+      // 3. 全局通过var定义一个变量是会加在window对象上面，let和const是不会再window上面添加任何属性
+      var message2 = "vuejs"
+      console.log(window)
+
+      // javaScript中有全局作用域、函数作用域、块作用域
+      // var 没有块级作用域
+      {
+        var name22 = "xionglp"
+      }
+      // 代码块中使用var定义的变量， 在外面是可以访问到
+      console.log("name22: ", name22)
+
+      // ES6中新增了块级作用域，通过let、const、function、class声明的，具备块级作用域的限制
+      {
+        let foo = "foo"
+        function bar() {
+          console.log("bar")
+        }
+        class Person {}
+      }
+      // console.log(foo) // 访问不到 Uncaught ReferenceError: foo is not defined
+      bar() // 可以访问 ，为啥函数可以访问到， 因为js引擎会对函数的声明进行特殊处理，允许像var那样进行作用域提升
+      // var p = new Person() // ReferenceError: Person is not defined
+
+      // 5、暂时性死区：和定义的位置没有关系， 和代码执行的顺序有关系
+      // function foo() {
+      //   console.log(bar, baz)
+      //   console.log("Hello World")
+      //   console.log("你好 世界")
+      //   let bar = "bar"
+      //   let baz = "baz"
+      // }
+      // foo()
+
+      // function foo() {
+      //   console.log(message)
+      // }
+
+      // let message = "Hello World"
+      // foo()
+      // console.log(message)
+
+      // 暂时性死区形成后，在该区域内该标识符不能访问
+      // let message = "Hello World"
+      // function foo() {
+      //   console.log(message)
+      //   const message = "哈哈哈哈"
+      // }
+
+      // foo()
+
+      // Object.toString()
+    </script>
+  </body>
+</html>
