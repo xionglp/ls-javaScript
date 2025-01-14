@@ -26,6 +26,17 @@
       var value = info[key]
       console.log(`key: ${key}, value: ${value}`)
     }
+
+    // 2. javaScript中 内存的分配方式
+    // 原始类型占据的空间是在栈内存中分配的
+    // 对象类型占据的空间是在堆内存中分配的
+    var name = "hello"
+    var age = 18
+    var foo = {
+      foo: "foo",
+      bar: 123
+    }
+    var message = name + "world"
   </script>
 </body>
 </html>

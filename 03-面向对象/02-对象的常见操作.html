@@ -50,6 +50,24 @@
     console.log(person)
 
 
+    // 2. 对象方扩号使用
+    var obj = {
+      name: "xionglp",
+      "my friend": "kobe",
+      "eating someing": function() {
+        console.log("eating~")
+      }
+    }
+
+    console.log(obj.name)
+    console.log(obj["my friend"])
+    console.log(obj["name"])
+
+    obj["eating someing"]()
+    // var eatingKey = "eating someing"
+    // obj[eatingKey]()
+
+
   </script>
 </body>
 </html>
