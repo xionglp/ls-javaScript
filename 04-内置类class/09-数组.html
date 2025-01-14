@@ -9,6 +9,29 @@
   </head>
   <body>
     <script>
+      var names = ["abc", "cba", "nba", "mba"]
+      var product = { name: "苹果", price: 12 }
+      var products = [
+        { name: "鼠标", price: 98 },
+        { name: "键盘", price: 100 },
+        { name: "西瓜", price: 20 },
+        product
+      ]
+
+      // 方式二： 类数组
+      var arr1 = new Array()
+      var arr2 = new Array("aaa", "bbb", "ccc")
+      console.log(arr1, arr2)
+
+      // 传入一个数组， 默认创建一个对应长度的数组
+      var arr3 = new Array(5)
+      console.log(arr3)
+
+      // 通过索引访问元素
+      console.log(names[0],names[names.length - 1])
+
+
+      // 二、数组新增和删除
       var arrs = ["abc", "cba", "nba", "mba", "abcd"]
       // 1. 在数组的尾部添加和删除元素
       // 数组的push方法，是在数组的尾部添加一个数据， 返回值是返回数组新的长度。
@@ -35,6 +58,22 @@
 
       arrs.splice(3, 1, "NNN")
       console.log(arrs)
+
+      // 三 、 数组length属性
+
+      var names = ["abc", "cba", "nba", "mba"]
+      // 属性length
+      console.log(names.length)
+
+      // length属性可以扩容
+      names.length = 10
+      console.log(names)
+
+      // 设置数组的长度为0就是清空数组
+      names.length = 0
+      console.log(names)
+
+      
     </script>
   </body>
 </html>
