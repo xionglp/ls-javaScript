@@ -87,4 +87,4 @@ var book = null
 console.log(typeof book) // object
 console.log(typeof null) // object
 
-console.log('数据类型', Object.prototype.toString.call(null))
+// console.log('数据类型', Object.prototype.toString.call(null))
