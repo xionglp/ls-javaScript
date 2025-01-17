@@ -12,8 +12,6 @@
       // 题目一:
       /**
        * 先执行同步函数， promise参数传入的回调函数是同步函数，会直接执行，
-       * 当executor执行到resolve或者reject，此时是异步操作，
-       * 先执行then、catch等， 等主栈完成后，才会调用resolve、reject中存放的方法执行。
        * promise.then 是微任务队列，先执行。 setTimeout是宏任务队列， 比微任务后执行。
        * 
       */
@@ -30,6 +28,7 @@
       //   console.log("setTimeout")
       // })
       // console.log("script end")
+
       
 
 
@@ -54,6 +53,9 @@
 
       // script start
       // async1 start
+      // async2
+      // script end
+      // async1 end
 
 
     </script>
