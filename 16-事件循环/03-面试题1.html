@@ -15,19 +15,22 @@
        * promise.then 是微任务队列，先执行。 setTimeout是宏任务队列， 比微任务后执行。
        * 
       */
-      // console.log("script start")
-      // let promise1 = new Promise(function(resolve) {
-      //   console.log("promise1")
-      //   resolve()
-      //   console.log("promise1 end")
-      // }).then(function() {
-      //   console.log("promise2")
-      // })
+      console.log("script start")
+      let promise1 = new Promise(function(resolve) {
+        console.log("promise1")
+        resolve()
+        console.log("promise1 end")
+      }).then(function() {
+        console.log("promise2")
+      })
 
-      // setTimeout(function() {
-      //   console.log("setTimeout")
-      // })
-      // console.log("script end")
+      setTimeout(function() {
+        console.log("setTimeout")
+      })
+      console.log("script end")
+
+      // script start -> promise1 -> promise1 end -> script end
+      // promise2 -> setTimeout
 
       
 
@@ -37,25 +40,21 @@
        * async函数返回的是一个Promise
        * await 后续的代码不会执行（下一行后面的代码），必须等到promise返回了结果才会执行
       */
-      async function async1() {
-        console.log("async1 start")
-        await async2()  
-        console.log("async1 end")
-      }
+      // async function async1() {
+      //   console.log("async1 start")
+      //   await async2()  
+      //   console.log("async1 end")
+      // }
 
-      async function async2() {
-        console.log("async2")
-      }
+      // async function async2() {
+      //   console.log("async2")
+      // }
 
-      console.log("script start")
-      async1()
-      console.log("script end")
-
-      // script start
-      // async1 start
-      // async2
-      // script end
-      // async1 end
+      // console.log("script start")
+      // async1()
+      // console.log("script end")
+      
+      // script start -> async1 start -> async2 -> script end -> async1 end
 
 
     </script>
