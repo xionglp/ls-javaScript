@@ -25,7 +25,7 @@
       })
 
       // 3. all方法: 多个Promise包裹在一起形成一个新的Promise，
-      // 当多有的Promise对象状态变成fulfailled状态，新Promise状态为fulfailled状态，返回值为所有Promise返回值形成的数组
+      // 当所有的Promise对象状态变成fulfailled状态，新Promise状态为fulfailled状态，返回值为所有Promise返回值形成的数组
       // 当有一个Promise的状态为reject，新的Promise的状态为reject，并且会将第一个reject作为参数
       const p1 = new Promise((resolve, reject) => {
         setTimeout(() => {
